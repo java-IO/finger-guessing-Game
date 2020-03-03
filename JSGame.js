@@ -1,0 +1,4 @@
+
+function Person() {
+    var chuQuan;
+}
