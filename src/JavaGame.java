@@ -1,32 +1,43 @@
 import java.util.Random;
+
 /**
  * 测试类
  */
 class JavaGame {
     public static void main(String[] args) {
-        Game game = new Game();
+        GameResult game = new GameResult();
         game.game();
+/*        Jia jia = new Jia();
+        Yi yi = new Yi();
+        jia.guessJ();
+        System.out.println(jia.getChuquan());
+
+        System.out.println(yi.getChuquan());
+        yi.guessY();
+        System.out.println(yi.getChuquan());*/
     }
 }
 
 /**
  * 结果类
  */
-class Game {
+class GameResult {
     Jia jia = new Jia();
     Yi yi = new Yi();
-    Game1 game1 = new Game1();
+    Game game1 = new Game();
 
     /*统计所有次数及甲的胜率*/
     public void game() {
-        for (int i = 0; game1.getJiaYing() <= 2 && game1.getYiYing() <= 2; i++) {
-            jia.guessJ();
-            yi.guessY();
+        while (game1.getYiYing() <= 2 && game1.getJiaYing() <= 2) {
+            // for (int i = 0; game1.getJiaYing() <= 2 && game1.getYiYing() <= 2; i++) {
+            jia.guess();
+            yi.guess();
             game1.game(jia, yi);
             System.out.println("平局数量为:" + game1.getPing());
             System.out.println("甲胜数量为:" + game1.getJiaYing());
             System.out.println("乙胜数量为:" + game1.getYiYing());
         }
+        // }
         /*
          比如：X是总次数 Y是胜
          公式是这样的：(100/X)*Y=胜率公式
@@ -40,15 +51,13 @@ class Game {
         System.out.println("共计局数:" + sum);
         System.out.println("甲的胜率:" + winJ + "%");
         System.out.println("乙的胜率:" + winY + "%");
-
-
     }
 }
 
 /**
  * 游戏类
  */
-class Game1 {
+class Game {
     /*平局ping
       甲赢jiaYing
       乙赢yiYing
@@ -162,7 +171,8 @@ class Person {
  * * 一旦出了“布”，下次肯定不会出“布”
  */
 class Jia extends Person {
-    public void guessJ() {
+    @Override
+    public void guess() {
         if (getChuquan() == "布") {
             int random = new Random().nextInt(2) + 1;
             if (random == 2)
@@ -171,7 +181,6 @@ class Jia extends Person {
                 setChuquan("石头");
         } else
             super.guess();
-
     }
 }
 
@@ -180,12 +189,12 @@ class Jia extends Person {
  * 一旦出了“石头”，下次肯定是“剪刀”
  */
 class Yi extends Person {
-    public void guessY() {
+    @Override
+    public void guess() {
         if (getChuquan() == "石头") {
             setChuquan("剪刀");
         } else
             super.guess();
-
     }
 }
 

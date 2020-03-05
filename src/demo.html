@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="1">123</div>
+<script>
+    $(function () {
+        for(var i=0;game.getJiasheng()<=2||game.getYisheng()<=2;i++){
+            if(juese.getChuquan()=="布"){
+                juese.jia()
+            }else{
+                juese.chuquan
+            }
+            if(juese.getChuquan()=="石头"){
+                juese.yi()
+            }else{
+                juese.chuquan
+            }
+            game.game();
+            console.log("over");
+            console.log(game.getPing());
+            console.log(game.getYisheng());
+            console.log(game.getJiasheng());
+        }
+    });
+    var juese = {//角色
+        "chuquan": null,
+        "setChuquan": function (chuquan) {
+            return this.chuquan = chuquan;
+        },
+        "getChuquan": function () {
+            return this.chuquan;
+        },
+        "guess": function () {
+            var number = Math.floor(Math.random() * (3) + 1);
+            if (number == 1) {
+                this.setChuquan("石头")
+            } else if (number == 3) {
+                this.setChuquan("布")
+            } else {
+                this.setChuquan("剪刀")
+            }
+        },
+        "jia": function () {
+            if (this.getChuquan() == "布") {
+                var number = Math.floor(Math.random() * (2) + 1);
+                if (number == 1) {
+                    this.setChuquan("石头")
+                } else {
+                    this.setChuquan("剪刀")
+                }
+            }
+        },
+        "yi": function () {
+            if (this.getChuquan() == "石头") {
+                this.setChuquan("剪刀")
+            }
+        }
+    };
+    //游戏类
+    var game={
+        //平局
+        "ping":0,
+        //甲胜
+        "jiasheng":0,
+        //乙胜
+        "yisheng":0,
+        "setPing":function (ping) {
+            return this.ping = ping;
+        },
+        "setYisheng":function (yisheng) {
+            return this.yisheng = yisheng;
+        },
+        "setJiasheng":function (jiasheng) {
+            return this.jiasheng = jiasheng;
+        },
+        "getJiasheng":function () {
+            return  this.jiasheng
+        },
+        "getPing":function () {
+            return  this.ping
+        },
+        "getYisheng":function () {
+            return  this.yisheng
+        },
+        "game":function () {
+            var jiachuquan=juese.getChuquan()
+            var yichuquan=juese.getChuquan()
+            console.log(jiachuquan)
+            console.log(yichuquan)
+            if (jiachuquan=="石头"){
+                if (yichuquan=="石头"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==平局")
+                    this.ping+1
+                }else if (yichuquan=="剪刀"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==甲赢")
+                    this.jiasheng+1
+                }else if (yichuquan=="布"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==乙赢")
+                    this.yisheng+1
+                }
+            }
+            if (jiachuquan=="剪刀"){
+                if (yichuquan=="石头"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==乙局")
+                    this.yisheng+1
+                }else if (yichuquan=="剪刀"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==平局")
+                    this.ping+1
+                }else if (yichuquan=="布"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==甲赢")
+                    this.jiasheng+1
+                }
+            }if (jiachuquan=="布"){
+                if (yichuquan=="石头"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==甲局")
+                    this.jiasheng+1
+                }else if (yichuquan=="剪刀"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==乙局")
+                    this.yisheng+1
+                }else if (yichuquan=="布"){
+                    console.log("甲："+jiachuquan+"乙："+yichuquan+"==平局")
+                    this.ping+1
+                }
+            }
+        }
+    };
+    //游戏测试
+
+</script>
+</body>
+</html>
