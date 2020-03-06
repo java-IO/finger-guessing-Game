@@ -1,3 +1,5 @@
+package javaGame;
+
 import java.util.Random;
 
 /**
@@ -7,14 +9,6 @@ class JavaGame {
     public static void main(String[] args) {
         GameResult game = new GameResult();
         game.game();
-/*        Jia jia = new Jia();
-        Yi yi = new Yi();
-        jia.guessJ();
-        System.out.println(jia.getChuquan());
-
-        System.out.println(yi.getChuquan());
-        yi.guessY();
-        System.out.println(yi.getChuquan());*/
     }
 }
 
